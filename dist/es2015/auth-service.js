@@ -60,6 +60,10 @@ export let AuthService = (_dec = inject(HttpClient, Authentication, OAuth1, OAut
     });
   }
 
+  setToken(token) {
+    this.auth.setToken(token);
+  }
+
   login(email, password) {
     let loginUrl = this.auth.getLoginUrl();
     let content;
@@ -77,7 +81,7 @@ export let AuthService = (_dec = inject(HttpClient, Authentication, OAuth1, OAut
       headers: typeof content === 'string' ? { 'Content-Type': 'application/x-www-form-urlencoded' } : {},
       body: typeof content === 'string' ? content : json(content)
     }).then(status).then(response => {
-      this.auth.setToken(response);
+    //  this.auth.setToken(response);
       this.eventAggregator.publish('auth:login', response);
       return response;
     });
