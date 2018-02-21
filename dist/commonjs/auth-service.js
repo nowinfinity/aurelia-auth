@@ -82,6 +82,11 @@ var AuthService = exports.AuthService = (_dec = (0, _aureliaDependencyInjection.
     });
   };
 
+  AuthService.prototype.setToken = function setToken(token) {
+    var _this2 = this;
+    _this2.auth.setToken(token);
+  }
+
   AuthService.prototype.login = function login(email, password) {
     var _this2 = this;
 
@@ -101,7 +106,7 @@ var AuthService = exports.AuthService = (_dec = (0, _aureliaDependencyInjection.
       headers: typeof content === 'string' ? { 'Content-Type': 'application/x-www-form-urlencoded' } : {},
       body: typeof content === 'string' ? content : (0, _aureliaFetchClient.json)(content)
     }).then(_authUtilities.status).then(function (response) {
-      _this2.auth.setToken(response);
+    //  _this2.auth.setToken(response);
       _this2.eventAggregator.publish('auth:login', response);
       return response;
     });
